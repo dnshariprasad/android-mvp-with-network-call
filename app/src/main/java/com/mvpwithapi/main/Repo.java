@@ -9,6 +9,10 @@ import rx.Observable;
  */
 
 public interface Repo {
+    Observable<List<MainBean>> getUsersFromMemory();
+
+    Observable<List<MainBean>> getUsersFromNetwork();
+
     Observable<List<MainBean>> getUsers();
 
     void saveUsers(List<MainBean> user);
