@@ -21,6 +21,20 @@ public class MainPresenter implements MainMvp.Presenter {
     }
 
     @Override
+    public void setView(MainMvp.View view) {
+        this.view = view;
+    }
+
+    @Override
+    public void rxUnSubscribe() {
+        if (subscription != null) {
+            if (!subscription.isUnsubscribed()) {
+                subscription.unsubscribe();
+            }
+        }
+    }
+
+    @Override
     public void loadData() {
         subscription = model.users().
                 subscribeOn(Schedulers.io())
@@ -46,19 +60,5 @@ public class MainPresenter implements MainMvp.Presenter {
                         }
                     }
                 });
-    }
-
-    @Override
-    public void rxUnSubscribe() {
-        if (subscription != null) {
-            if (!subscription.isUnsubscribed()) {
-                subscription.unsubscribe();
-            }
-        }
-    }
-
-    @Override
-    public void setView(MainMvp.View view) {
-        this.view = view;
     }
 }

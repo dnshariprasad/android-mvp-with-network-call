@@ -38,7 +38,6 @@ public class MainRepo implements Repo {
         }
     }
 
-
     @Override
     public Observable<List<MainBean>> getUsersFromNetwork() {
         return api.users();
@@ -46,9 +45,8 @@ public class MainRepo implements Repo {
 
     @Override
     public Observable<List<MainBean>> getUsers() {
-        return getUsersFromMemory().switchIfEmpty(getUsersFromMemory());
+        return getUsersFromMemory().switchIfEmpty(getUsersFromNetwork());
     }
-
 
     @Override
     public void saveUsers(List<MainBean> results) {
